@@ -1,0 +1,81 @@
+#include<stdio.h>
+void main()
+{
+  int i,j,k=1,m,n;
+  int b[10][10],b1[10][10],b2[10][10];
+  printf("enter rowsize and columnsize\n");
+  scanf("%d%d",&m,&n);
+  printf("enter the elements of matrix\n");
+     
+      for(i=0;i<m;i++)
+      {
+         for(j=0;j<n;j++)
+         { 
+           scanf("%d",&b[i][j]);
+         }
+      }
+        printf("the  sparse matrix\n");
+        
+        for(i=0;i<m;i++)
+         {
+           for(j=0;j<n;j++)
+           {
+             printf("%d\t",b[i][j]);
+           }
+           printf("\n");
+         }
+           for(i=0;i<m;i++)
+           {
+            for(j=0;j<n;j++)
+            {
+              if(b[i][j]!=0)
+              {
+               b1[k][0]=i;
+               b1[k][1]=j;
+               b1[k][2]=b[i][j];
+               k++;
+              }
+          }
+        }
+          b1[0][0]=m;
+          b1[0][1]=n;
+          b1[0][2]=k-1;
+          printf("the matrix in triplet form\n");
+          
+            for(i=0;i<k;i++)
+            {
+              for(j=0;j<3;j++)
+              {
+             printf("%d\t",b1[i][j]);
+             }
+             printf("\n");
+            }
+          k=1;
+          for(i=0;i<b1[0][1];i++)
+          {
+           for(j=1;j<=b1[0][2];j++)
+           {
+            if(b1[j][1]==i)    
+           {
+           b2[k][0]=b1[j][1];
+           b2[k][1]=b1[j][0];
+           b2[k][2]=b1[j][2];
+           k++;
+          }
+        }
+      }
+      b2[0][0]=b1[0][1];
+      b2[0][1]=b1[0][0];
+      b2[0][2]=b1[0][2];
+      printf("transpose of sparse matrix\n");
+      for(i=0;i<k;i++)
+      {
+       for(j=0;j<3;j++)
+       {
+        printf("%d\t",b2[i][j]);
+        }
+        printf("\n");
+        
+      }
+      }      
+        
