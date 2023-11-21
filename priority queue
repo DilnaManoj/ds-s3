@@ -1,0 +1,94 @@
+#include <stdio.h>
+#define MAX_SIZE 5
+
+int priorityQueue[MAX_SIZE];
+int front = -1, rear = -1;
+
+void enqueue(int item) {
+    if (rear == MAX_SIZE - 1) {
+        printf("Priority Queue is full. Cannot enqueue.\n");
+    } else {
+        int i;
+        if (front == -1) {
+            front = rear = 0;
+            priorityQueue[rear] = item;
+        } else {
+            for (i = rear; i >= 0; i--) {
+                if (item > priorityQueue[i]) {
+                    priorityQueue[i + 1] = priorityQueue[i];
+                } else {
+                    break;
+                }
+            }
+            priorityQueue[i + 1] = item;
+            rear++;
+        }
+        printf("Enqueued: %d\n", item);
+    }
+}
+
+void dequeue() {
+    if (front == -1) {
+        printf("Priority Queue is empty. Cannot dequeue.\n");
+    } else {
+        printf("Dequeued: %d\n", priorityQueue[front]);
+        if (front == rear) {
+            front = rear = -1;
+        } else {
+            front++;
+        }
+    }
+}
+
+void display() {
+    if (front == -1) {
+        printf("Priority Queue is empty.\n");
+    } else {
+        printf("Priority Queue elements: ");
+        for (int i = front; i <= rear; i++) {
+
+            printf("%d ", priorityQueue[i]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int choice, item;
+
+    while (1) {
+        printf("1. Enqueue\n");
+        printf("2. Dequeue\n");
+        printf("3. Display\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1: // Enqueue
+                printf("Enter an element to enqueue: ");
+                scanf("%d", &item);
+                enqueue(item);
+                break;
+
+            case 2: // Dequeue
+                dequeue();
+                break;
+
+            case 3: // Display
+                display();
+                break;
+
+            case 4: // Exit
+                printf("Exiting the program.\n");
+                return 0;
+
+            default:
+                printf("Invalid choice. Please enter a valid option.\n");
+        }
+    }
+return 0;
+}
+
+
+
